@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import RegistrationPage from "./pages/RegistrationPage";
+import BoughtProductsPage from "./pages/BoughtProductsPage";
 
 const App = () => {
     const isAuthenticated = !!localStorage.getItem('token');
@@ -20,6 +21,10 @@ const App = () => {
             <Route
                 path="/products"
                 element={isAuthenticated ? <ProductListPage /> : <Navigate to="/login" />}
+            />
+            <Route
+                path="/bought-products"
+                element={isAuthenticated ? <BoughtProductsPage /> : <Navigate to="/login" />}
             />
             <Route path="*" element={<Navigate to="/login" />} />
         </Routes>

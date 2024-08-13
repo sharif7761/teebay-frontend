@@ -9,7 +9,7 @@ const ProductList = ({ title, query, variables }) => {
     if (loading) return <CircularProgress />;
     if (error) return <Typography color="error">Error: {error.message}</Typography>;
 
-    const products = data.products || data.myProducts;
+    const products = data.products || [];
 
     return (
         <Container maxWidth="md">
