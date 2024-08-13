@@ -1,17 +1,22 @@
 import './App.css'
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import ProductListPage from './pages/ProductListPage';
 
-function App() {
+const App = () => {
+    const isAuthenticated = !!localStorage.getItem('token');
 
-  return (
-    <>
+    return (
         <Routes>
-            <Route path="/" />
-            <Route path="/sign-up"  />
-            <Route path="/home"  />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+                path="/products"
+                element={isAuthenticated ? <ProductListPage /> : <Navigate to="/login" />}
+            />
+            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
-    </>
-  )
-}
+    );
+};
 
-export default App
+export default App;
