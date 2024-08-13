@@ -8,3 +8,13 @@ export const LOGIN_USER = gql`
         }
     }
 `;
+
+export const REGISTER_USER = gql`
+    mutation Mutation($registerInput: RegisterInput) {
+      register(registerInput: $registerInput) {
+        id
+        email
+        name
+      }
+    }
+`;
