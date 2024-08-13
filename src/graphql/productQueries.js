@@ -10,3 +10,16 @@ export const GET_PRODUCTS = gql`
         }
     }
 `;
+
+export const GET_MY_PRODUCTS = gql`
+  query GetMyProducts {
+    myProducts {
+      id
+      title
+      description
+      purchasePrice
+      rentPrice
+      categories
+    }
+  }
+`;
