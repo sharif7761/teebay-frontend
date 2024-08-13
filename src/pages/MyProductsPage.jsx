@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Container, Typography, Grid, Box, Card, CardContent, CircularProgress } from '@mui/material';
+import { Container, Typography, Grid, Box, Card, CardContent, CircularProgress, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { GET_MY_PRODUCTS } from '../graphql/productQueries';
 
 const ProductListPage = () => {
@@ -32,6 +33,14 @@ const ProductListPage = () => {
                                         <Typography variant="body2">
                                             Categories: {product.categories.join(', ')}
                                         </Typography>
+                                        <Button
+                                            component={Link}
+                                            to={`/products/${product.id}`}
+                                            variant="contained"
+                                            color="primary"
+                                        >
+                                            View Details
+                                        </Button>
                                     </CardContent>
                                 </Card>
                             </Grid>

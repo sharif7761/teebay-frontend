@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import ProductListPage from './pages/ProductListPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 import RegistrationPage from "./pages/RegistrationPage";
 
 const App = () => {
@@ -12,6 +13,10 @@ const App = () => {
         <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route
+                path="/products/:id"
+                element={isAuthenticated ? <ProductDetailsPage /> : <Navigate to="/login" />}
+            />
             <Route
                 path="/products"
                 element={isAuthenticated ? <ProductListPage /> : <Navigate to="/login" />}
