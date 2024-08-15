@@ -13,8 +13,13 @@ export const REGISTER_USER = gql`
     mutation Mutation($registerInput: RegisterInput) {
       register(registerInput: $registerInput) {
         id
+        firstName
+        lastName
+        address
         email
-        name
+        phone
+        createdAt
+        updatedAt
       }
     }
 `;

@@ -28,72 +28,73 @@ const LoginForm = () => {
     });
 
     return (
-        <Box
-            component="form"
-            onSubmit={formik.handleSubmit}
-            sx={{
-                maxWidth: 400,
-                mx: 'auto',
-                mt: 8,
-                p: 3,
-                boxShadow: 3,
-                borderRadius: 2,
-            }}
-        >
+        <>
             <Typography variant="h5" align="center" mb={3}>
-                Login
+                SIGN IN
             </Typography>
-
-            <TextField
-                fullWidth
-                id="email"
-                name="email"
-                label="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-                margin="normal"
-            />
-
-            <TextField
-                fullWidth
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-                margin="normal"
-            />
-
-            {error && (
-                <Typography color="error" align="center" variant="body2" mt={2}>
-                    {error.message}
-                </Typography>
-            )}
-
-            <Button
-                color="primary"
-                variant="contained"
-                type="submit"
-                disabled={loading}
-                sx={{ mt: 2 }}
+            <Box
+                component="form"
+                onSubmit={formik.handleSubmit}
+                sx={{
+                    maxWidth: 400,
+                    mx: 'auto',
+                    mt: 8,
+                    p: 3,
+                    boxShadow: 3,
+                    borderRadius: 2,
+                }}
             >
-                {loading ? 'Logging in...' : 'Login'}
-            </Button>
+                <TextField
+                    fullWidth
+                    id="email"
+                    name="email"
+                    label="Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                    margin="normal"
+                />
 
-            <Typography align="center" mt={2}>
-                Do not have an account?
-                <Link href="/registration">
-                     Sign Up
-                </Link>
-            </Typography>
-        </Box>
+                <TextField
+                    fullWidth
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
+                    margin="normal"
+                />
+
+                {error && (
+                    <Typography color="error" align="center" variant="body2" mt={2}>
+                        {error.message}
+                    </Typography>
+                )}
+
+                <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    disabled={loading}
+                    sx={{ mt: 2 }}
+                >
+                    {loading ? 'Logging in...' : 'Login'}
+                </Button>
+
+                <Typography align="center" mt={2}>
+                    Do not have an account?
+                    <Link href="/registration">
+                        Sign Up
+                    </Link>
+                </Typography>
+            </Box>
+        </>
     );
 };
 
