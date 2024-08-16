@@ -33,11 +33,15 @@ export const GET_MY_PRODUCTS = gql`
         description
         purchasePrice
         rentPrice
+        views
         rentType
         categories
-        
+        transactions {
+          id
+          transactionType
+        }
       }
-}
+    }
 `;
 
 export const GET_BOUGHT_PRODUCTS = gql`
@@ -52,6 +56,7 @@ export const GET_BOUGHT_PRODUCTS = gql`
           rentPrice
           rentType
           categories
+          views
         }
         user {
           id
@@ -133,6 +138,10 @@ export const SINGLE_PRODUCT_QUERY = gql`
           phone
           createdAt
           updatedAt
+        }
+        transactions {
+          id
+          transactionType
         }
       }
     }`

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useQuery } from '@apollo/client';
-import { Box, CircularProgress, Button } from '@mui/material';
+import {Box, CircularProgress, Button, Typography} from '@mui/material';
 import ProductCard from '../components/product/ProductCard.jsx';
 import { GET_MY_PRODUCTS, DELETE_PRODUCT_MUTATION } from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
@@ -47,11 +47,16 @@ const MyProductsPage = () => {
                     <ProductCard
                         product={product}
                     />
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
+                    {
+                        product?.transactions?.length ? <Typography variant="body2" sx={{ flexGrow: 1 }}>
+                            Sold / Rented product can not be deleted
+                        </Typography> : <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
                             <Button variant="contained" color="primary"  onClick={(e) => { e.stopPropagation();handleOpenModal(product.id, 'Delete'); }}>
                                 Delete
                             </Button>
-                    </Box>
+                        </Box>
+                    }
+
                 </Box>
             ))}
             <Button variant="contained" color="primary" component={Link} to="/add-product">

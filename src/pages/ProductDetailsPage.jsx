@@ -64,14 +64,21 @@ const ProductDetails = () => {
                 <Typography variant="body1" gutterBottom>
                     {productDetails.description}
                 </Typography>
+                {productDetails?.transactions?.length ?
+                    <Typography variant="body2" sx={{ flexGrow: 1 }}>
+                        The Product Is Already Sold / Rented
+                    </Typography>
+                    :
+                    <Button
+                        color="secondary"
+                        onClick={() => handleOpenModal(productDetails.id, 'Buy')}
+                        variant="contained"
+                    >
+                        Buy
+                    </Button>
+                }
             </Paper>
-            <Button
-                color="secondary"
-                onClick={() => handleOpenModal(productDetails.id, 'Buy')}
-                variant="contained"
-            >
-                Buy
-            </Button>
+
             <ProductActionModal
                 open={openModal}
                 handleClose={handleCloseModal}

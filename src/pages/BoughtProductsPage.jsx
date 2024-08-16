@@ -35,7 +35,6 @@ const BoughtProductsPage = () => {
                 >
                     <ProductCard
                         product={data.product}
-                        onDetails={true}
                     />
                 </Box>
             ))}
