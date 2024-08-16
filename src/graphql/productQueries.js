@@ -40,16 +40,33 @@ export const GET_MY_PRODUCTS = gql`
 `;
 
 export const GET_BOUGHT_PRODUCTS = gql`
-  query GetBoughtProducts {
-    boughtProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
-    }
-  }
+  query BoughtProducts {
+      boughtProducts {
+        id
+        product {
+          id
+          title
+          description
+          purchasePrice
+          rentPrice
+          rentType
+          categories
+        }
+        user {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+        transactionType
+        transactionDate
+        price
+      }
+ }
 `;
 
 export const GET_SOLD_PRODUCTS = gql`

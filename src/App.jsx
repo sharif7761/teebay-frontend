@@ -30,7 +30,7 @@ const App = () => {
             />
             <Route
                 path="/bought-products"
-                element={isAuthenticated ? <BoughtProductsPage /> : <Navigate to="/login" />}
+                element={isAuthenticated ? <Layout><BoughtProductsPage /></Layout>: <Navigate to="/login" />}
             />
             <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
