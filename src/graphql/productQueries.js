@@ -12,28 +12,31 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const GET_ALL_PRODUCTS = gql`
-  query GetMyProducts {
-    myProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
+  query AllProducts {
+      allProducts {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        rentType
+        categories
+      }
     }
-  }
 `;
 export const GET_MY_PRODUCTS = gql`
-  query GetMyProducts {
-    myProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
-    }
-  }
+  query Query {
+      userProducts {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        rentType
+        categories
+        
+      }
+}
 `;
 
 export const GET_BOUGHT_PRODUCTS = gql`
