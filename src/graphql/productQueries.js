@@ -135,3 +135,27 @@ export const SINGLE_PRODUCT_QUERY = gql`
         }
       }
     }`
+
+export const UPDATE_PRODUCT = gql`
+    mutation UpdateProduct($updateProductId: ID!, $productInput: ProductInput) {
+      updateProduct(id: $updateProductId, productInput: $productInput) {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        rentType
+        categories
+        creator {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+          
+        }
+      }
+    }`

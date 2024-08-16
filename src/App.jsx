@@ -8,6 +8,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import BoughtProductsPage from "./pages/BoughtProductsPage";
 import Layout from "./components/layout/Layout.jsx";
 import MyProductsPage from "./pages/MyProductsPage.jsx";
+import ProductEditPage from "./pages/ProductEditPage.jsx";
 
 const App = () => {
     const isAuthenticated = !!localStorage.getItem('teebayToken');
@@ -19,6 +20,10 @@ const App = () => {
             <Route
                 path="/products/:id"
                 element={isAuthenticated ? <ProductDetailsPage /> : <Navigate to="/login" />}
+            />
+            <Route
+                path="/edit-product/:id"
+                element={isAuthenticated ? <ProductEditPage /> : <Navigate to="/login" />}
             />
             <Route
                 path="/products"
