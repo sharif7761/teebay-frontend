@@ -2,18 +2,18 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, CircularProgress } from '@mui/material';
 import ProductCard from '../components/product/ProductCard.jsx';
-import { GET_BOUGHT_PRODUCTS } from '../graphql/productQueries.js';
+import { GET_SOLD_PRODUCTS} from '../graphql/productQueries.js';
 
-const BoughtProductsPage = () => {
-    const { loading, error, data } = useQuery(GET_BOUGHT_PRODUCTS);
+const SoldProductsPage = () => {
+    const { loading, error, data } = useQuery(GET_SOLD_PRODUCTS);
 
     if (loading) return <CircularProgress />;
     if (error) return <p>Error: {error.message}</p>;
     return (
         <Box>
-            {data.boughtProducts.map((data) => (
+            {data.soldProducts.map((data) => (
                 <Box
-                    key={data.product.id}
+                    key={data.id}
                     sx={{
                         border: '1px solid #ccc',
                         borderRadius: '8px',
@@ -25,7 +25,7 @@ const BoughtProductsPage = () => {
                     }}
                 >
                     <ProductCard
-                        product={data.product}
+                        product={data}
                     />
                 </Box>
             ))}
@@ -33,4 +33,4 @@ const BoughtProductsPage = () => {
     );
 };
 
-export default BoughtProductsPage;
+export default SoldProductsPage;

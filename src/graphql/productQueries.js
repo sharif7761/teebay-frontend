@@ -76,42 +76,92 @@ export const GET_BOUGHT_PRODUCTS = gql`
 `;
 
 export const GET_SOLD_PRODUCTS = gql`
-  query GetSoldProducts {
-    soldProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
+  query SoldProducts {
+      soldProducts {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        views
+        rentType
+        categories
+        creator {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+        transactions {
+          id
+          transactionType
+        }
+      }
     }
-  }
 `;
 
 export const GET_BORROWED_PRODUCTS = gql`
-  query GetBorrowedProducts {
-    borrowedProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
+  query RentProducts {
+    rentProducts {
+        id
+        product {
+          id
+          title
+          description
+          purchasePrice
+          rentPrice
+          rentType
+          categories
+          views
+        }
+        user {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+        transactionType
+        transactionDate
+        price
+      }
     }
-  }
 `;
 
 export const GET_LENT_PRODUCTS = gql`
-  query GetLentProducts {
-    lentProducts {
-      id
-      title
-      description
-      purchasePrice
-      rentPrice
-      categories
+  query LentProducts {
+      lentProducts {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        views
+        rentType
+        categories
+        creator {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+        transactions {
+          id
+          transactionType
+        }
+      }
     }
-  }
 `;
 
 export const DELETE_PRODUCT_MUTATION = gql`
