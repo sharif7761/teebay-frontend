@@ -21,6 +21,7 @@ export const GET_ALL_PRODUCTS = gql`
         rentPrice
         rentType
         categories
+        views
       }
     }
 `;

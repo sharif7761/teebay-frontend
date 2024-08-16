@@ -24,6 +24,7 @@ const RegistrationForm = () => {
         try {
             const { confirmPassword, ...rest } = values;
             const { data } = await registerUser({ variables: { registerInput: rest } });
+            alert('User registration successful')
             navigate('/login');
         } catch (error) {
             setErrors({ submit: error.message });

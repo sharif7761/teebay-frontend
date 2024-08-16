@@ -17,25 +17,15 @@ const ProductDetails = () => {
 
     return (
         <Box sx={{ maxWidth: 600, margin: 'auto', mt: 5 }}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-                <Typography variant="h4" gutterBottom>
+            <Paper elevation={3} sx={{ p: 3,  display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Typography variant="h6" gutterBottom>
                     {productDetails.title}
                 </Typography>
+                <Typography variant="body2">Categories: {productDetails?.categories?.join(', ')}</Typography>
+                <Typography variant="body2">Price: ${productDetails?.purchasePrice} | Rent: ${productDetails?.rentPrice} {productDetails?.rentType?.replace('_', ' ')}</Typography>
+
                 <Typography variant="body1" gutterBottom>
                     {productDetails.description}
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                    Purchase Price: ${productDetails.purchasePrice.toFixed(2)}
-                </Typography>
-                {productDetails.rentPrice && (
-                    <>
-                        <Typography variant="h6" gutterBottom>
-                            Rent Price: ${productDetails.rentPrice.toFixed(2)} ({productDetails.rentType})
-                        </Typography>
-                    </>
-                )}
-                <Typography variant="subtitle1" gutterBottom>
-                    Categories: {productDetails.categories.join(', ')}
                 </Typography>
             </Paper>
         </Box>
