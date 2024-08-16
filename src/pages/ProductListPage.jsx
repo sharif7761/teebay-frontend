@@ -19,6 +19,10 @@ const ProductListPage = () => {
         navigate(`/product/${id}`);
     };
 
+    const handleCardClick = (id) => {
+        navigate(`/product/${id}`);
+    }
+
     return (
         <Box>
             {data.allProducts.map((product) => (
@@ -33,10 +37,10 @@ const ProductListPage = () => {
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                     }}
+                    onClick={(e) => {handleCardClick(product.id)}}
                 >
                     <ProductCard
                         product={product}
-                        onDetails={handleDetails}
                     />
                 </Box>
             ))}

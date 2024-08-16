@@ -5,8 +5,10 @@ import ProductCard from '../components/product/ProductCard.jsx';
 import { GET_MY_PRODUCTS, DELETE_PRODUCT_MUTATION } from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
 import {Link} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const MyProductsPage = () => {
+    const navigate = useNavigate();
     const { loading, error, data, refetch } = useQuery(GET_MY_PRODUCTS);
     const [openModal, setOpenModal] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
@@ -23,6 +25,11 @@ const MyProductsPage = () => {
         setOpenModal(false);
         setSelectedProductId(null);
     };
+
+    const handleCardClick = (id) => {
+         navigate(`/edit-product/${id}`)
+    }
+
     return (
         <Box>
             {data.userProducts.map((product) => (
@@ -35,13 +42,13 @@ const MyProductsPage = () => {
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                     }}
+                     onClick={(e) => {handleCardClick(product.id)}}
                 >
                     <ProductCard
                         product={product}
-                        onDetails={true}
                     />
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
-                            <Button variant="contained" color="primary" onClick={() => handleOpenModal(product.id, 'Delete')}>
+                            <Button variant="contained" color="primary"  onClick={(e) => { e.stopPropagation();handleOpenModal(product.id, 'Delete'); }}>
                                 Delete
                             </Button>
                     </Box>
