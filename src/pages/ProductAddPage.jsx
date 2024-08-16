@@ -1,13 +1,13 @@
 import React from 'react';
+import { Box} from '@mui/material';
 import MultiStepForm from "../components/productCreateSteps/MultiStepForm.jsx";
 
 const ProductAddPage = () => {
 
     return (
-        <div>
-            <h1>Create a Product</h1>
+        <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
             <MultiStepForm/>
-        </div>
+        </Box>
     );
 };
 

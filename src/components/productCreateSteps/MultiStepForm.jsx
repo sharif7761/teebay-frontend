@@ -49,8 +49,8 @@ const MultiStepForm = () => {
     return (
         <div>
             {step === 1 && <ProductTitleStep values={formData} onNext={handleNext} />}
-            {step === 2 && <ProductDescriptionStep values={formData} onNext={handleNext} onBack={handleBack} />}
-            {step === 3 && <ProductCategoriesStep values={formData} onNext={handleNext} onBack={handleBack} />}
+            {step === 2 && <ProductCategoriesStep values={formData} onNext={handleNext} onBack={handleBack} />}
+            {step === 3 && <ProductDescriptionStep values={formData} onNext={handleNext} onBack={handleBack} />}
             {step === 4 && <ProductPricingStep values={formData} onNext={handleNext} onBack={handleBack} />}
             {step === 5 && <ProductReviewStep values={formData} onBack={handleBack} onSave={handleSubmit} />}
         </div>

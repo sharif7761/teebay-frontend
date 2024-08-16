@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { TextField, Select, MenuItem, FormControl, InputLabel, Button, Box } from '@mui/material';
 
 const validationSchema = Yup.object({
     purchasePrice: Yup.number().required('Purchase price is required').positive('Must be positive'),
@@ -23,29 +24,51 @@ const ProductPricingStep = ({ values, onNext, onBack }) => {
         >
             {({ errors, touched }) => (
                 <Form>
-                    <div>
-                        <label htmlFor="purchasePrice">Purchase Price</label>
-                        <Field name="purchasePrice" type="number" />
-                        {errors.purchasePrice && touched.purchasePrice ? <div>{errors.purchasePrice}</div> : null}
-                    </div>
-                    <div>
-                        <label htmlFor="rentPrice">Rent Price</label>
-                        <Field name="rentPrice" type="number" />
-                        {errors.rentPrice && touched.rentPrice ? <div>{errors.rentPrice}</div> : null}
-                    </div>
-                    <div>
-                        <label htmlFor="rentType">Rent Type</label>
-                        <Field as="select" name="rentType">
-                            {rentTypeOptions.map(option => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </Field>
-                        {errors.rentType && touched.rentType ? <div>{errors.rentType}</div> : null}
-                    </div>
-                    <button type="button" onClick={onBack}>Back</button>
-                    <button type="submit">Next</button>
+                    <Box>
+                        <Field
+                            name="purchasePrice"
+                            as={TextField}
+                            label="Purchase Price"
+                            variant="outlined"
+                            type="number"
+                            fullWidth
+                            margin="normal"
+                            error={Boolean(errors.purchasePrice && touched.purchasePrice)}
+                            helperText={touched.purchasePrice && errors.purchasePrice}
+                        />
+                        <Field
+                            name="rentPrice"
+                            as={TextField}
+                            label="Rent Price"
+                            variant="outlined"
+                            type="number"
+                            fullWidth
+                            margin="normal"
+                            error={Boolean(errors.rentPrice && touched.rentPrice)}
+                            helperText={touched.rentPrice && errors.rentPrice}
+                        />
+                        <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(errors.rentType && touched.rentType)}>
+                            <InputLabel>Rent Type</InputLabel>
+                            <Field
+                                name="rentType"
+                                as={Select}
+                            >
+                                {rentTypeOptions.map(option => (
+                                    <MenuItem key={option} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </Field>
+                        </FormControl>
+                    </Box>
+                    <Box mt={2}>
+                        <Button type="button" variant="outlined" color="secondary" onClick={onBack}>
+                            Back
+                        </Button>
+                        <Button type="submit" variant="contained" color="primary" sx={{ ml: 2 }}>
+                            Next
+                        </Button>
+                    </Box>
                 </Form>
             )}
         </Formik>

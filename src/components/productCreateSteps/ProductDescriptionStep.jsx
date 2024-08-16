@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { TextField, Button, Box } from '@mui/material';
 
 const validationSchema = Yup.object({
     description: Yup.string().required('Product description is required'),
@@ -15,13 +16,28 @@ const ProductDescriptionStep = ({ values, onNext, onBack }) => {
         >
             {({ errors, touched }) => (
                 <Form>
-                    <div>
-                        <label htmlFor="description">Product Description</label>
-                        <Field name="description" as="textarea" />
-                        {errors.description && touched.description ? <div>{errors.description}</div> : null}
-                    </div>
-                    <button type="button" onClick={onBack}>Back</button>
-                    <button type="submit">Next</button>
+                    <Box>
+                        <Field
+                            name="description"
+                            as={TextField}
+                            label="Product Description"
+                            variant="outlined"
+                            multiline
+                            rows={4}
+                            fullWidth
+                            margin="normal"
+                            error={Boolean(errors.description && touched.description)}
+                            helperText={touched.description && errors.description}
+                        />
+                    </Box>
+                    <Box mt={2}>
+                        <Button type="button" variant="outlined" color="secondary" onClick={onBack}>
+                            Back
+                        </Button>
+                        <Button type="submit" variant="contained" color="primary" sx={{ ml: 2 }}>
+                            Next
+                        </Button>
+                    </Box>
                 </Form>
             )}
         </Formik>
