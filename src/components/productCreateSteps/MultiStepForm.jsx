@@ -5,7 +5,7 @@ import ProductCategoriesStep from './ProductCategoriesStep';
 import ProductPricingStep from './ProductPricingStep';
 import ProductReviewStep from './ProductReviewStep';
 import {useMutation} from "@apollo/client";
-import {ADD_PRODUCT} from "../../graphql/productQueries.js";
+import {ADD_PRODUCT, GET_MY_PRODUCTS} from "../../graphql/productQueries.js";
 import { useNavigate } from 'react-router-dom';
 
 const MultiStepForm = () => {
@@ -37,6 +37,7 @@ const MultiStepForm = () => {
                 variables: {
                     productInput: formData,
                 },
+                refetchQueries: [{ query: GET_MY_PRODUCTS }],
             });
             alert('Product added successfully!');
             navigate('/my-products')
