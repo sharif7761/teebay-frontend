@@ -21,12 +21,23 @@ const BoughtProductsPage = () => {
     return (
         <Box>
             {data.boughtProducts.map((data) => (
-                <ProductCard
+                <Box
                     key={data.product.id}
-                    product={data.product}
-                    onDelete={handleDelete}
-                    onDetails={handleDetails}
-                />
+                    sx={{
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '16px',
+                        margin: '16px 0',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                    }}
+                >
+                    <ProductCard
+                        product={data.product}
+                        onDetails={true}
+                    />
+                </Box>
             ))}
         </Box>
     );

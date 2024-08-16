@@ -11,6 +11,10 @@ const ProductListPage = () => {
     if (loading) return <CircularProgress />;
     if (error) return <p>Error: {error.message}</p>;
 
+    // const handleDelete = (id) => {
+    //     // Implement delete functionality
+    // };
+
     const handleDetails = (id) => {
         navigate(`/product/${id}`);
     };
@@ -18,11 +22,23 @@ const ProductListPage = () => {
     return (
         <Box>
             {data.allProducts.map((product) => (
-                <ProductCard
+                <Box
                     key={product.id}
-                    product={product}
-                    onDetails={handleDetails}
-                />
+                    sx={{
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '16px',
+                        margin: '16px 0',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                    }}
+                >
+                    <ProductCard
+                        product={product}
+                        onDetails={handleDetails}
+                    />
+                </Box>
             ))}
         </Box>
     );

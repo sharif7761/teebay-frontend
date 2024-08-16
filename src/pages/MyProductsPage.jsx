@@ -4,6 +4,7 @@ import { Box, CircularProgress, Button } from '@mui/material';
 import ProductCard from '../components/product/ProductCard.jsx';
 import { GET_MY_PRODUCTS, DELETE_PRODUCT_MUTATION } from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
+import {Link} from "react-router-dom";
 
 const MyProductsPage = () => {
     const { loading, error, data, refetch } = useQuery(GET_MY_PRODUCTS);
@@ -25,20 +26,30 @@ const MyProductsPage = () => {
     return (
         <Box>
             {data.userProducts.map((product) => (
-                <>
+                <Box key={product.id} sx={{
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '16px',
+                        margin: '16px 0',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                    }}
+                >
                     <ProductCard
-                        key={product.id}
                         product={product}
+                        onDetails={true}
                     />
-                    <Button
-                        color="secondary"
-                        onClick={() => handleOpenModal(product.id, 'Delete')}
-                        variant="contained"
-                    >
-                        Delete
-                    </Button>
-                </>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
+                            <Button variant="contained" color="primary" onClick={() => handleOpenModal(product.id, 'Delete')}>
+                                Delete
+                            </Button>
+                    </Box>
+                </Box>
             ))}
+            <Button variant="contained" color="primary" component={Link} to="/add-product">
+                Add Product
+            </Button>
             <ProductActionModal
                 open={openModal}
                 handleClose={handleCloseModal}
