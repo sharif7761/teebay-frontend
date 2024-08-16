@@ -5,9 +5,11 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../graphql/authQueries';
 import  loginValidationSchema  from '../validations/loginValidationSchema.js';
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from "../context/AuthContext.jsx";
 
 const LoginForm = () => {
     const [login, { loading, error }] = useMutation(LOGIN_USER);
+    const { loginUser } = useAuth();
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -19,7 +21,7 @@ const LoginForm = () => {
         onSubmit: async (values) => {
             try {
                 const { data } = await login({ variables: { email: values.email, password: values.password } });
-                localStorage.setItem('teebayToken', data.login.token);
+                loginUser(data.login.token)
                 navigate('/products');
             } catch (err) {
                 console.error('Login failed', err);
