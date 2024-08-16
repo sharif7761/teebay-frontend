@@ -112,3 +112,26 @@ export const DELETE_PRODUCT_MUTATION = gql`
 mutation Mutation($deleteProductId: ID!) {
   deleteProduct(id: $deleteProductId)
 }`
+
+export const SINGLE_PRODUCT_QUERY = gql`
+    query ProductDetails($productDetailsId: ID!) {
+      productDetails(id: $productDetailsId) {
+        id
+        title
+        description
+        purchasePrice
+        rentPrice
+        rentType
+        categories
+        creator {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+      }
+    }`
