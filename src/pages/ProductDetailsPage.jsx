@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import {Box, Typography, CircularProgress, Paper, Button} from '@mui/material';
-import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION, DELETE_PRODUCT_MUTATION} from '../graphql/productQueries.js';
+import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION} from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
 
 const ProductDetails = () => {
@@ -69,13 +69,22 @@ const ProductDetails = () => {
                         The Product Is Already Sold / Rented
                     </Typography>
                     :
-                    <Button
-                        color="secondary"
-                        onClick={() => handleOpenModal(productDetails.id, 'Buy')}
-                        variant="contained"
-                    >
-                        Buy
-                    </Button>
+                    <>
+                        <Button
+                            color="secondary"
+                            onClick={() => handleOpenModal(productDetails.id, 'Buy')}
+                            variant="contained"
+                        >
+                            Buy
+                        </Button>
+                        <Button
+                            color="secondary"
+                            onClick={() => handleOpenModal(productDetails.id, 'Rent')}
+                            variant="contained"
+                        >
+                            Rent
+                        </Button>
+                    </>
                 }
             </Paper>
 
@@ -83,7 +92,7 @@ const ProductDetails = () => {
                 open={openModal}
                 handleClose={handleCloseModal}
                 productId={selectedProductId}
-                actionType={'Buy'}
+                actionType={actionType}
                 mutation={BUY_PRODUCT_MUTATION}
                 refetchProducts={refetch}
                 confirmationText={confirmationText}
