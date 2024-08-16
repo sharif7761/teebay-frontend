@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import {Box, Typography, CircularProgress, Paper, Button} from '@mui/material';
-import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION} from '../graphql/productQueries.js';
+import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION, RENT_PRODUCT_MUTATION} from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
 
 const ProductDetails = () => {
@@ -88,16 +88,30 @@ const ProductDetails = () => {
                 }
             </Paper>
 
-            <ProductActionModal
-                open={openModal}
-                handleClose={handleCloseModal}
-                productId={selectedProductId}
-                actionType={actionType}
-                mutation={BUY_PRODUCT_MUTATION}
-                refetchProducts={refetch}
-                confirmationText={confirmationText}
-                buttonText={buttonText}
-            />
+            {actionType === 'Buy' ?
+                <ProductActionModal
+                    open={openModal}
+                    handleClose={handleCloseModal}
+                    productId={selectedProductId}
+                    actionType={actionType}
+                    mutation={BUY_PRODUCT_MUTATION}
+                    refetchProducts={refetch}
+                    confirmationText={confirmationText}
+                    buttonText={buttonText}
+                />
+            :
+                <ProductActionModal
+                    open={openModal}
+                    handleClose={handleCloseModal}
+                    productId={selectedProductId}
+                    actionType={actionType}
+                    mutation={RENT_PRODUCT_MUTATION}
+                    refetchProducts={refetch}
+                    confirmationText={confirmationText}
+                    buttonText={buttonText}
+                />
+            }
+
         </Box>
     );
 };

@@ -262,3 +262,13 @@ export const BUY_PRODUCT_MUTATION = gql`
         }
       }
     }`
+
+export const RENT_PRODUCT_MUTATION = gql`
+    mutation RentProduct($productId: ID!) {
+      rentProduct(productId: $productId) {
+        id
+        transactionType
+        transactionDate
+        price
+      }
+    }`
