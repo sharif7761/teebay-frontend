@@ -71,13 +71,14 @@ const ProductDetails = () => {
                     :
                     <>
                         <Button
-                            color="secondary"
+                            color="primary"
                             onClick={() => handleOpenModal(productDetails.id, 'Buy')}
                             variant="contained"
                         >
                             Buy
                         </Button>
                         <Button
+                            sx={{  mt: 2 }}
                             color="secondary"
                             onClick={() => handleOpenModal(productDetails.id, 'Rent')}
                             variant="contained"
