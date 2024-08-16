@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Button, Typography } from '@mui/material';
+import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import {useAuth} from "../../context/AuthContext.jsx";
 
@@ -12,8 +12,9 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: 'grey' }} >
             <Toolbar>
+                <Box sx={{ display: 'flex', gap: 3 }}>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Teebay
                 </Typography>
@@ -41,6 +42,7 @@ const Navbar = () => {
                 <Button color="error" variant="contained" onClick={handleLogout}>
                     Logout
                 </Button>
+                </Box>
             </Toolbar>
         </AppBar>
     );
