@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import { useQuery } from '@apollo/client';
+import React, {useEffect, useState} from 'react';
+import {useMutation, useQuery} from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import {Box, Typography, CircularProgress, Paper, Button} from '@mui/material';
-import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION, RENT_PRODUCT_MUTATION} from '../graphql/productQueries.js';
+import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION, RENT_PRODUCT_MUTATION, INCREMENT_PRODUCT_VIEWS_MUTATION} from '../graphql/productQueries.js';
 import ProductActionModal from "../components/modal/ProductActions.jsx";
 
 const ProductDetails = () => {
@@ -13,6 +13,13 @@ const ProductDetails = () => {
     const { loading, error, data, refetch  } = useQuery(SINGLE_PRODUCT_QUERY, {
         variables: { productDetailsId: id },
     });
+    const [incrementProductViews] = useMutation(INCREMENT_PRODUCT_VIEWS_MUTATION);
+
+    useEffect(() => {
+        if (id) {
+            incrementProductViews({ variables: { productId: id } });
+        }
+    }, [id, incrementProductViews]);
 
     if (loading) return <CircularProgress />;
     if (error) return <Typography color="error">Error: {error.message}</Typography>;

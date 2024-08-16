@@ -15,9 +15,6 @@ const ProductListPage = () => {
     if (loading) return <CircularProgress />;
     if (error) return <p>Error: {error.message}</p>;
 
-
-
-
     const handleCardClick = (id) => {
         navigate(`/product/${id}`);
     }

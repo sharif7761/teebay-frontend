@@ -272,3 +272,12 @@ export const RENT_PRODUCT_MUTATION = gql`
         price
       }
     }`
+
+export const INCREMENT_PRODUCT_VIEWS_MUTATION = gql`
+mutation IncrementProductViews($productId: ID!) {
+  incrementProductViews(productId: $productId) {
+    id
+    views
+  }
+}
+`
