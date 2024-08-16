@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 const ProductActionModal = ({
                                 open,
                                 handleClose,
                                 deleteProductId,
+                                productId,
                                 actionType,
                                 mutation,
                                 refetchProducts,
@@ -13,12 +15,16 @@ const ProductActionModal = ({
                                 buttonText,
                             }) => {
     const [performAction] = useMutation(mutation);
-
+    const navigate = useNavigate();
     const handleAction = async () => {
         try {
-            await performAction({ variables: { deleteProductId } });
-            refetchProducts(); // To refetch the products list after action
+            actionType === 'Delete' ?
+            await performAction({ variables: { deleteProductId } })
+            : await performAction({ variables: { productId } })
+            refetchProducts();
             handleClose();
+            alert(`successfully ${actionType}`)
+            navigate('/products')
         } catch (error) {
             console.error(`Error performing ${actionType} action:`, error);
         }

@@ -160,3 +160,32 @@ export const UPDATE_PRODUCT = gql`
         }
       }
     }`
+
+export const BUY_PRODUCT_MUTATION = gql`
+    mutation BuyProduct($productId: ID!) {
+      buyProduct(productId: $productId) {
+        id
+        transactionType
+        transactionDate
+        price
+        product {
+          id
+          title
+          description
+          purchasePrice
+          rentPrice
+          rentType
+          categories
+        }
+        user {
+          id
+          firstName
+          lastName
+          address
+          email
+          phone
+          createdAt
+          updatedAt
+        }
+      }
+    }`

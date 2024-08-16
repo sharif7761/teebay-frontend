@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, CircularProgress, Paper } from '@mui/material';
-import { SINGLE_PRODUCT_QUERY } from '../graphql/productQueries.js';
+import {Box, Typography, CircularProgress, Paper, Button} from '@mui/material';
+import {SINGLE_PRODUCT_QUERY, BUY_PRODUCT_MUTATION, DELETE_PRODUCT_MUTATION} from '../graphql/productQueries.js';
+import ProductActionModal from "../components/modal/ProductActions.jsx";
 
 const ProductDetails = () => {
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [actionType, setActionType] = useState('');
     const { id } = useParams(); // Get the product ID from the URL params
-    const { loading, error, data } = useQuery(SINGLE_PRODUCT_QUERY, {
+    const { loading, error, data, refetch  } = useQuery(SINGLE_PRODUCT_QUERY, {
         variables: { productDetailsId: id },
     });
 
@@ -14,6 +18,39 @@ const ProductDetails = () => {
     if (error) return <Typography color="error">Error: {error.message}</Typography>;
 
     const { productDetails } = data;
+
+    const handleOpenModal = (productId, type) => {
+        setSelectedProductId(productId);
+        setActionType(type);
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setSelectedProductId(null);
+        setActionType('');
+    };
+
+    const getMutationAndText = () => {
+        switch (actionType) {
+            case 'Buy':
+                return {
+                    mutation: BUY_PRODUCT_MUTATION,
+                    confirmationText: 'Are you sure you want to buy this product?',
+                    buttonText: 'Buy',
+                };
+            case 'Rent':
+                return {
+                    mutation: BUY_PRODUCT_MUTATION,
+                    confirmationText: 'Are you sure you want to rent this product?',
+                    buttonText: 'Rent',
+                };
+            default:
+                return {};
+        }
+    };
+
+    const { mutation, confirmationText, buttonText } = getMutationAndText();
 
     return (
         <Box sx={{ maxWidth: 600, margin: 'auto', mt: 5 }}>
@@ -28,6 +65,23 @@ const ProductDetails = () => {
                     {productDetails.description}
                 </Typography>
             </Paper>
+            <Button
+                color="secondary"
+                onClick={() => handleOpenModal(productDetails.id, 'Buy')}
+                variant="contained"
+            >
+                Buy
+            </Button>
+            <ProductActionModal
+                open={openModal}
+                handleClose={handleCloseModal}
+                productId={selectedProductId}
+                actionType={'Buy'}
+                mutation={BUY_PRODUCT_MUTATION}
+                refetchProducts={refetch}
+                confirmationText={confirmationText}
+                buttonText={buttonText}
+            />
         </Box>
     );
 };

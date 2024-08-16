@@ -22,15 +22,6 @@ const MyProductsPage = () => {
         setOpenModal(false);
         setSelectedProductId(null);
     };
-
-    const handleDelete = (id) => {
-        // Implement delete functionality
-    };
-
-    const handleDetails = (id) => {
-        // Implement details functionality
-    };
-
     return (
         <Box>
             {data.userProducts.map((product) => (
@@ -38,8 +29,6 @@ const MyProductsPage = () => {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        onDelete={handleDelete}
-                        onDetails={handleDetails}
                     />
                     <Button
                         color="secondary"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 
-const ProductCard = ({ product, onDelete, onDetails }) => {
+const ProductCard = ({ product }) => {
     return (
         <Box
             sx={{
@@ -21,18 +21,6 @@ const ProductCard = ({ product, onDelete, onDetails }) => {
                 {product.description}
             </Typography>
             <Typography variant="body2">Views: {product?.views}</Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
-                {onDetails && (
-                    <Button variant="contained" color="primary" onClick={() => onDetails(product.id)}>
-                        Details
-                    </Button>
-                )}
-                {onDetails && (
-                    <Button variant="contained" color="secondary" onClick={() => onDelete(product.id)}>
-                        Delete
-                    </Button>
-                )}
-            </Box>
         </Box>
     );
 };
