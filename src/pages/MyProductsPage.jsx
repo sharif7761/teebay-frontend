@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useQuery } from '@apollo/client';
 import {Box, CircularProgress, Button, Typography} from '@mui/material';
 import ProductCard from '../components/product/ProductCard.jsx';
@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 const MyProductsPage = () => {
     const navigate = useNavigate();
     const { loading, error, data, refetch } = useQuery(GET_MY_PRODUCTS);
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
     const [openModal, setOpenModal] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
     if (loading) return <CircularProgress />;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, CircularProgress } from '@mui/material';
 import ProductCard from '../components/product/ProductCard.jsx';
@@ -6,18 +6,17 @@ import { GET_ALL_PRODUCTS } from '../graphql/productQueries.js';
 import {useNavigate} from "react-router-dom";
 
 const ProductListPage = () => {
-    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+    const { loading, error, data, refetch } = useQuery(GET_ALL_PRODUCTS);
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
     const navigate = useNavigate();
     if (loading) return <CircularProgress />;
     if (error) return <p>Error: {error.message}</p>;
 
-    // const handleDelete = (id) => {
-    //     // Implement delete functionality
-    // };
 
-    const handleDetails = (id) => {
-        navigate(`/product/${id}`);
-    };
+
 
     const handleCardClick = (id) => {
         navigate(`/product/${id}`);
