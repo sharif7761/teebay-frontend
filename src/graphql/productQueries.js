@@ -107,3 +107,8 @@ export const GET_LENT_PRODUCTS = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT_MUTATION = gql`
+mutation Mutation($deleteProductId: ID!) {
+  deleteProduct(id: $deleteProductId)
+}`
