@@ -9,6 +9,7 @@ import BoughtProductsPage from "./pages/BoughtProductsPage";
 import MyProductsPage from "./pages/MyProductsPage.jsx";
 import ProductEditPage from "./pages/ProductEditPage.jsx";
 import { useAuth } from './context/AuthContext.jsx';
+import ProductAddPage from "./pages/ProductAddPage.jsx";
 
 const App = () => {
     const { isAuthenticated } = useAuth();
@@ -24,7 +25,7 @@ const App = () => {
             <Route path="/my-products" element={<ProtectedRoute element={<MyProductsPage />} />} />
             <Route path="/product/:id" element={<ProtectedRoute element={<ProductDetailsPage />} />} />
             <Route path="edit-product/:id" element={<ProtectedRoute element={<ProductEditPage />} />} />
-            <Route path="add-product" element={<ProtectedRoute element={<ProductEditPage />} />} />
+            <Route path="add-product" element={<ProtectedRoute element={<ProductAddPage />} />} />
             <Route path="/bought-product" element={<ProtectedRoute element={<BoughtProductsPage />} />} />
             <Route path="/sold-product" element={<ProtectedRoute element={<BoughtProductsPage />} />} />
             <Route path="/borrowed-product" element={<ProtectedRoute element={<BoughtProductsPage />} />} />
